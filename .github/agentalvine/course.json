@@ -1,0 +1,126 @@
+{
+  "id": "04-tests-docs",
+  "title": "Laboratory 04 · Terraform tests and documentation",
+  "number": 4,
+  "topics": [
+    "D1.5",
+    "D1.6"
+  ],
+  "duration": "75–105 minutes",
+  "description": "No earlier repository required. A complete baseline and security child are included so you can focus on tests and documentation.",
+  "nextRepository": "alvinea28/ws2-module-release-consumer-laboratory-05",
+  "completion": "The learner tests, isolated defect detector and generated documentation checks passed. The shipped guard was not broken; the harness mutation was temporary. Mocked checks are not live Azure validation. Every laboratory is independent; the catalogue order is a learning recommendation, not a requirement to create or finish another repository.",
+  "steps": [
+    {
+      "id": "1",
+      "title": "Add a valid case and an intended rejection",
+      "lesson": ".github/steps/01.md",
+      "requiresCommit": true,
+      "checks": [
+        {
+          "kind": "file",
+          "path": "tests/learner.tftest.hcl",
+          "contains": [
+            "mock_provider \"azurerm\"",
+            "run \"learner_valid_subnets\"",
+            "run \"learner_reject_invalid_cidr\"",
+            "output.subnet_ids"
+          ],
+          "pattern": "expect_failures\\s*=\\s*\\[\\s*var\\.address_space\\s*\\]",
+          "notContains": [
+            "TODO"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Observe the detector and narrow the example rule",
+      "lesson": ".github/steps/02.md",
+      "requiresCommit": true,
+      "checks": [
+        {
+          "kind": "file",
+          "path": "exercise/rules.tfvars.example",
+          "pattern": "source_address_prefix\\s*=\\s*\"10\\.42\\.1\\.0/24\"",
+          "notContains": [
+            "TODO",
+            "0.0.0.0/0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Generate the actual module interface",
+      "lesson": ".github/steps/03.md",
+      "requiresCommit": true,
+      "checks": [
+        {
+          "kind": "file",
+          "path": "docs/module-api.md",
+          "contains": [
+            "## Requirements",
+            "## Providers",
+            "## Inputs",
+            "## Outputs",
+            "5.4.0",
+            "vnet_id",
+            "subnet_ids",
+            "nsg_id",
+            "association_ids"
+          ],
+          "notContains": [
+            "TODO"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Explain consumption and pass learner CI",
+      "lesson": ".github/steps/04.md",
+      "requiresCommit": true,
+      "checks": [
+        {
+          "kind": "file",
+          "path": "README.md",
+          "contains": [
+            "existing resource group",
+            "subnet-security",
+            "mock",
+            "MIT"
+          ],
+          "notContains": [
+            "TODO"
+          ]
+        },
+        {
+          "kind": "file",
+          "path": "examples/basic/README.md",
+          "contains": [
+            "web",
+            "data",
+            "mock-only"
+          ],
+          "notContains": [
+            "TODO"
+          ]
+        },
+        {
+          "kind": "workflow",
+          "file": "lab-checks.yml",
+          "jobs": [
+            "Test learner module"
+          ],
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "beginnerSetup": true,
+  "sourceRepository": "alvinea28/ws2-terraform-tests-docs-laboratory-04",
+  "sourceBranch": "dev",
+  "independent": true,
+  "prerequisiteLabs": []
+}

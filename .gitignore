@@ -1,0 +1,15 @@
+.terraform/
+**/.terraform/
+.workshop/
+node_modules/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+*.pem
+*.pfx
+*.key
+.env
+.env.*

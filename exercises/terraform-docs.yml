@@ -1,0 +1,6 @@
+formatter: markdown table
+sections:
+  show: [requirements, providers, modules, resources, inputs, outputs]
+sort:
+  enabled: true
+  by: name

@@ -1,0 +1,13 @@
+# TODO: narrow the source to the approved web subnet 10.42.1.0/24.
+# This unsafe input is an intentional rejection fixture, not an Azure plan.
+security_rules = {
+  web-https = {
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_address_prefix      = "*"
+    destination_address_prefix = "VirtualNetwork"
+    destination_port_range     = "443"
+  }
+}
