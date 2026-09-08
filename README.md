@@ -1,6 +1,6 @@
 # Laboratory 04 · Terraform tests and documentation
 
-**Repository:** [alvinea28/ws2-terraform-tests-docs-laboratory-04](https://github.com/alvinea28/ws2-terraform-tests-docs-laboratory-04) · **Recommended order:** 04 of 08 · **Time:** 75–105 minutes
+**Public source template (not the clone URL after copying):** [alvinea28/ws2-terraform-tests-docs-laboratory-04](https://github.com/alvinea28/ws2-terraform-tests-docs-laboratory-04) · **Recommended order:** 04 of 08 · **Time:** 75–105 minutes
 
 > [!NOTE]
 > **This laboratory is independent.** No earlier repository required. A complete baseline and security child are included so you can focus on tests and documentation.
