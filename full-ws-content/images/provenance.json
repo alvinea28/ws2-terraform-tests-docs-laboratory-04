@@ -1,0 +1,22 @@
+{
+  "capturedOn": "2026-09-14",
+  "exercisePreview": {
+    "kind": "Actual anonymous GitHub Exercise Preview viewport; zero participant progress",
+    "private": false,
+    "url": "https://github.com/alvinea28/ws2-terraform-tests-docs-laboratory-04/issues/1",
+    "previewRun": "https://github.com/alvinea28/ws2-terraform-tests-docs-laboratory-04/actions/runs/34879101569",
+    "capturedAt": "2026-09-14T19:07:20.474Z",
+    "sha256": "1acc4fe62045d2b01dca4b6ffd18f6c04a7db5fbc2f71610c92a591f85728a67"
+  },
+  "localValidation": {
+    "kind": "New local output-viewer capture of actual fresh commands; not terminal UI or a participant cycle",
+    "private": false,
+    "codeBaseRevision": "20f5abdfcac94c89af70ea873a724e11fbb90f57",
+    "controlledFilesSha256": "a663c9ccc7d2baa94bb64fefad8d4905a2eeb3119ffdb860ab7eb9d0ebbbe831",
+    "nodePasses": 35,
+    "solvedLabPassed": true,
+    "capturedAt": "2026-09-14T19:07:20.876Z",
+    "sha256": "eac68c8e90ba58b73b69e20e82c49773df5275c7b6702473388008b930815b62"
+  },
+  "historicalSimulation": "Original private A/B records remain in the private evidence repository; no original-day per-step screenshots exist."
+}
