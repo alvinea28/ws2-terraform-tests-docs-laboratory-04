@@ -2,27 +2,20 @@
 
 **Public source template (not the clone URL after copying):** [alvinea28/ws2-terraform-tests-docs-laboratory-04](https://github.com/alvinea28/ws2-terraform-tests-docs-laboratory-04) · **Recommended order:** 04 of 08 · **Time:** 75–105 minutes
 
-> [!NOTE]
-> **This laboratory is independent.** No earlier repository required. A complete baseline and security child are included so you can focus on tests and documentation.
-> New to the tools? The complete [illustrated first-time setup](docs/start-here.md) is included here—no other lab is required.
+**Goal:** Add tests, observe an isolated defect, narrow a sample and generate documentation. **This lab is independent:** the complete baseline and security child are included; no earlier lab or Azure resources are needed.
 
-## Start here — copy, clone, open and sign in
+**Tools:** Git, desktop VS Code, Node **24.16.0**, Terraform **1.16.1**, terraform-docs **0.24.0**; AzureRM **5.4.0** stays pinned.
 
-**Before cloning:** if Git or desktop VS Code is not installed, complete [the official installation steps](docs/toolchain.md), restart VS Code, then continue below. If you have no GitHub account yet, choose **Sign up** on GitHub and verify your email as shown in [Start here](docs/start-here.md).
+## Start here
 
-**Azure account/RG setup:** [Enter your Azure values and sign in](docs/azure-setup.md) using your own assigned tenant, subscription and existing resource group. This separate read-only setup does not authorize deployment or change the lab's credential-free checks.
+1. **Install/sign in:** [install the tools](docs/toolchain.md); restart VS Code. GitHub **Sign up** → verify email, or sign in to your personal account. Accept any assigned organization invitation.
+2. **Copy once:** **COPY EXERCISE** below or **Use this template → Create a new repository**. Keep **Private** and the `-laboratory-04` suffix. Already copied? Reuse it.
+3. **Clone/open:** copy **your copy's Code → HTTPS URL**. VS Code **Ctrl+Shift+P** (macOS **Cmd+Shift+P**) → **Git: Clone**, paste, choose destination, **Open**. Trust only the clone; Explorer must show it, not its parent.
+4. **Accounts/tools:** complete [account, authorship and readiness checks](docs/start-here.md). Verify VS Code's GitHub/Copilot sign-in and seat separately; commit name/email is not authentication.
+5. **Exercise:** refresh your copy's README/Issues; open its **Exercise**, branch `lab/tests-docs`. **Save → stage → commit → push → refresh the SAME Exercise**; [Git help](docs/git-workflow.md).
 
-1. **Browser:** sign in to your intended personal GitHub account. If the instructor assigned an organization, accept its invitation using that personal account.
-2. **GitHub:** create your own **Private** copy below, retaining **-laboratory-04** at the end of its name. If you already made a copy, do not copy again.
-3. **Desktop VS Code:** press **Ctrl+Shift+P** (macOS **Cmd+Shift+P**) → **Git: Clone** → paste **your own copy's HTTPS URL**, not this public source URL. Complete the trusted browser sign-in with the correct account.
-4. **Open the clone:** choose a local parent folder, then **Open** the newly cloned repository. Trust only the known workshop copy. Explorer must show this repository, not a parent with multiple labs or a browser-only virtual workspace.
-5. **Accounts:** verify GitHub and **GitHub Copilot** sign-in/seat. Git commit name/email is not sign-in. Use [account and context screenshots](docs/copilot-guide.md) if anything is unclear.
-6. **Terminal → New Terminal:** follow [tool installation and version checks](docs/toolchain.md), configure local Git authorship, then run **node scripts/doctor.mjs**. It checks local readiness, not browser/Copilot authorization.
-7. **Exercise:** refresh your copy after 20–60 seconds and open its Exercise issue. Follow the current detailed task and [save → stage → commit → push guide](docs/git-workflow.md).
-
-![Microsoft reference: cloning from GitHub in VS Code](docs/images/vscode-clone-github.png)
-
-*REFERENCE — Microsoft documentation example, not your account/repository. [Image attribution](docs/images/NOTICE.md). Detailed clone steps are in [Start here](docs/start-here.md#clone-your-copy-into-desktop-vs-code).*
+![Microsoft reference: cloning in VS Code](docs/images/vscode-clone-github.png)
+*REFERENCE — Microsoft, CC BY 3.0 US; not your account/repository. [Attribution](docs/images/NOTICE.md).*
 
 <!-- AGENTALVINE:START -->
 ## Copy this exercise once
@@ -32,21 +25,12 @@
 Select the intended Owner, keep **Private**, leave **Include all branches** off, and create the copy. Its own AgentAlvine issue will appear automatically.
 <!-- AGENTALVINE:END -->
 
-## Full workshop content and instructor preview
+## Review and boundaries
 
-Read the [full setup, all four activities, and recorded simulation outcomes](full-ws-content/README.md). The [public source Exercise #1](https://github.com/alvinea28/ws2-terraform-tests-docs-laboratory-04/issues/1) is a **read-only instructor Preview with zero participant progress**, not your learner issue. After copying, follow **your private copy's own README Exercise link**; AgentAlvine updates that same issue body from real work.
+Read [all four lessons, the test-to-docs flow and historical simulation proof](full-ws-content/README.md). The [public source Exercise #1](https://github.com/alvinea28/ws2-terraform-tests-docs-laboratory-04/issues/1) is a **read-only instructor Preview, 0/4**, not your learner issue.
 
-## What is included and what remains external
+[Azure values/sign-in](docs/azure-setup.md) is separate setup, not required by credential-free mocks. Issue progress permits no deployment/state access. The additional [repository security hands-on guide](docs/security-hands-on.md) covers licensed GitHub protection and a scan-only Terraform finding/fix; it is outside the four checks and original 33-step grader. Actual scan evidence and live approvals remain separate; no integration run is claimed.
 
-- This copy has its own instructions, exercises, reference code and tests. The catalogue sequence builds concepts; there is no required earlier repository.
-- Git, VS Code, Node24.16.0 and Terraform1.16.1 are required. AzureRM5.4.0 is pinned; tests use mocks, not an Azure account.
-- Lab04 also needs terraform-docs0.24.0; the exact documented generator and checker use the same renderer.
-- No Azure credentials, state or deployment are needed for the offline laboratory.
-
-## Help without guessing
-
-[First-time setup](docs/start-here.md) · [Azure values and sign-in](docs/azure-setup.md) · [Git actions](docs/git-workflow.md) · [Copilot accounts/context](docs/copilot-guide.md) · [Toolchain](docs/toolchain.md) · [Settings/Actions troubleshooting](docs/troubleshooting.md) · [Glossary](docs/glossary.md)
-
-Do not edit progress checkboxes or send manual evidence commands. AgentAlvine updates the same issue from real activity; a green checklist is not Azure authorization.
+AgentAlvine updates the same issue from real work, never manual checkboxes/evidence commands. Missing Exercise or failed checks? [Recovery](docs/troubleshooting.md).
 
 [All eight numbered laboratories](https://github.com/alvinea28/ws2-workshop-catalogue) · [MIT code license](LICENSE) · [Screenshot licenses](docs/images/NOTICE.md)

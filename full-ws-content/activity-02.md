@@ -7,68 +7,37 @@
 <!-- FULL-WS-LESSON:START -->
 ## Laboratory 04 - Step 2/4
 
-### Observe the isolated detector, then correct only the sample rule
+**Goal:** Observe a deliberate temporary defect, then correct only the sample's ingress source.
 
-| Before you begin | This step |
-| --- | --- |
-| Goal | Observe all three seed-harness phases at both boundaries and narrow the learner's sample ingress source. |
-| Time | 20–30 minutes, including temporary mock-suite execution. |
-| Files | Read [scripts/test-seeded-defect.mjs](../scripts/test-seeded-defect.mjs); edit only [exercise/rules.tfvars.example](../exercise/rules.tfvars.example). |
-| Starting branch | Continue `lab/tests-docs` in your independent private Laboratory 04 copy. |
+**Work:** your private copy's root, branch `lab/tests-docs`.
+**Files:** read [scripts/test-seeded-defect.mjs](../scripts/test-seeded-defect.mjs); edit only [exercise/rules.tfvars.example](../exercise/rules.tfvars.example).
 
-Beginner guides: [Start here](../docs/start-here.md) · [Git workflow](../docs/git-workflow.md) · [Copilot guide](../docs/copilot-guide.md) · [Toolchain](../docs/toolchain.md) · [Troubleshooting](../docs/troubleshooting.md).
+[Setup](../docs/start-here.md) · [Git help](../docs/git-workflow.md) · [Toolchain](../docs/toolchain.md) · [Recovery](../docs/troubleshooting.md)
 
-> [!NOTE]
-> The shipped baseline and child validators are already correct. The harness mutates **only an isolated temporary copy** of the included complete reference.
-> Its reference-only detector is one check, not a substitute for executing your actual learner root and sample in the full checker.
+### Do 1 — Read the isolation boundary
 
-### 1. Read what the harness will actually do
+The shipped baseline and child validators are **already correct**. Read `runSeededDefect` and `assertSeededFailure`: the harness copies the complete reference into an isolated OS temporary tree, weakens both guards there, restores them and deletes only that temporary tree. Both guards change so the child cannot hide the parent defect. Never seed-mutate source files or rewrite the harness.
 
-1. Confirm this clone and `lab/tests-docs`, then press **Ctrl+P** → [scripts/test-seeded-defect.mjs](../scripts/test-seeded-defect.mjs).
-2. Read `runSeededDefect`, the `roots` array, and `assertSeededFailure`; do not edit this script.
-3. It copies the included complete reference into an OS temporary directory, uses isolated environment/data paths, and runs provider-mocked tests.
-4. It first checks the healthy baseline and standalone child, temporarily weakens the wildcard predicate at **both** boundaries, then restores both copies and tests again.
-5. Both predicates are mutated so the parent test cannot be rescued by an unchanged child guard; the live learner files are never the mutation target.
-6. The harness removes only its fresh temporary tree afterward. It may download the pinned provider but must not use Azure credentials or remote state.
+### Do 2 — Observe every phase
 
-### 2. Run the real harness and read all six phase records
-
-1. Select **Terminal** → **New Terminal** at the repository root with Node **24.16.0**, Terraform **1.16.1**, and AzureRM **5.4.0**.
-2. Execute the supplied harness, not a hand-written imitation:
+At the root, use Node **24.16.0**, Terraform **1.16.1**, AzureRM **5.4.0**:
 
 ```powershell
 node scripts/test-seeded-defect.mjs
 ```
+**Why:** Run the real original → defect → repair detector at both input boundaries. **Expect:** overall exit 0 and all six records below. Missing phases, zero tests, unrelated provider errors or failed restoration mean failure; keep the diagnostic and ask for help.
 
-3. Read its actual output. Each of these phases must occur for both named modules, making **six phase records** in total:
-
-| Exact `phase` | `baseline` boundary | `subnet-security` boundary |
+| Expected `phase` | `baseline` | `subnet-security` |
 | --- | --- | --- |
-| `original` | Healthy complete mocked suite passes. | Healthy complete mocked suite passes. |
-| `seeded-defect-detected` | `reject_wildcard_ingress` detects bypass of `var.security_rules`. | The same named regression detects bypass of `var.rules`. |
-| `repaired` | Restored complete mocked suite passes. | Restored complete mocked suite passes. |
+| `original` | 46 passes | 41 passes |
+| `seeded-defect-detected` | One error at `var.security_rules` | One error at `var.rules` |
+| `repaired` | 46 passes | 41 passes |
 
-4. In the middle phase, both actual records must report **Missing expected failure**, not merely an arbitrary failure exit.
-5. The following is an expected record shape, **not a result already observed in your copy**:
+Read **actual output**, not this expectation table. Each middle record must say **Missing expected failure** for `reject_wildcard_ingress` in the seeded-regression file: `status: error`, `errored: 1`, and `passed/failed/skipped: 0` with Terraform exit 1. The weakened guard incorrectly accepts `*`; an arbitrary nonzero exit is not detection. Healthy/restored phases require zero failures/errors/skips.
 
-```json
-{"phase":"seeded-defect-detected","module":"baseline","diagnostic":"Missing expected failure","status":"error","passed":0,"failed":0,"errored":1,"skipped":0}
-{"phase":"seeded-defect-detected","module":"subnet-security","diagnostic":"Missing expected failure","status":"error","passed":0,"failed":0,"errored":1,"skipped":0}
-```
+### Do 3 — Narrow the actual sample
 
-6. Terraform **1.16.1** reports this expected detector event as JSON `status: error`, `errored: 1`; the harness validates that exact diagnostic, run, file, and variable.
-7. Confirm both **repaired** records and the final message that restored mock suites passed. The overall harness must exit successfully.
-
-> [!WARNING]
-> Zero tests, malformed mock IDs, provider errors, interruption, or failed restoration are not seed-detection evidence.
-> Never weaken your root/child validators, change the harness to accept any error, or report phase records you did not observe.
-> No Azure login, backend/state access, or real plan/apply is permitted.
-
-### 3. Narrow only the supplied example's source address
-
-1. Press **Ctrl+P**, enter [exercise/rules.tfvars.example](../exercise/rules.tfvars.example), and press **Enter**.
-2. In the `security_rules` map's `web-https` rule, replace the **source address** wildcard with `10.42.1.0/24`.
-3. Remove the unfinished/now-inaccurate comment; preserve every other supplied rule field. The corrected sample is:
+Replace the source-address wildcard with `10.42.1.0/24`, remove the unfinished comment and preserve every other field:
 
 ```hcl
 # Mock-only sample: allow HTTPS from the explicit synthetic web subnet.
@@ -85,57 +54,36 @@ security_rules = {
 }
 ```
 
-4. The optional `source_port_range` is omitted in this sample and retains its supplied `"*"` default; do not confuse it with the prohibited source-address wildcard.
-5. Keep the public baseline input name `security_rules`; the composed child receives it as `rules` internally.
-6. Remove `TODO` and any public default-route source from this sample, then press **Ctrl+S**. Do not change guards, priorities, destinations, protocols, or ports.
+Save. The omitted `source_port_range` still defaults to `"*"`; that is not the prohibited source-address wildcard. Keep the baseline input `security_rules`; its child receives `rules`.
 
-### 4. Exercise this actual sample with the learner tests
+### Do 4 — Exercise the corrected fixture
 
-1. Stay in the root initialized in Step 1. Run the focused fixture check; quote each **whole** path-bearing argument in PowerShell:
+Use the root initialized in [Step 1](activity-01.md), not the example directory:
 
 ```powershell
 terraform test '-filter=tests\learner.tftest.hcl' '-var-file=exercise/rules.tfvars.example'
 ```
+**Why:** `-filter` selects both learner cases; `-var-file` supplies the actual corrected sample. **Expect:** two passes, including the invalid-CIDR rejection. This tests learner code, unlike the reference detector. On failure inspect the exact field/path; do not weaken validation.
 
-Use the forward-slash selector on macOS/Linux:
+On macOS/Linux:
 
 ```bash
 terraform test '-filter=tests/learner.tftest.hcl' '-var-file=exercise/rules.tfvars.example'
 ```
+**Why:** Use the native slash selector with the same fixture. **Expect:** two executed passes; zero/unknown/skipped tests are failure. Windows requires the backslash selector above; quote each whole argument.
 
-2. Confirm the two learner cases actually execute and pass with the corrected sample. They retain the intended invalid-CIDR rejection as well.
-3. A healthy reference seed demonstration alone does not prove this sample is correct; that is why the full checker includes a separate fixture run.
-4. If initialization is missing, return to Step 1's backend-disabled/read-only-lock root initialization, not the illustrative example directory.
+### Do 5 — Save and advance
 
-### 5. Review, stage, commit, push, and inspect the newest commit
+**Save → stage → commit → push → refresh the SAME Exercise.** Only the sample belongs in this diff; use `lab: narrow the mock HTTPS sample source` and [Git help](../docs/git-workflow.md).
 
-1. Press **Ctrl+Shift+G**, open the sample diff, and verify only that sample changed; neither validator nor the harness should appear in the commit.
-2. Select **+** (**Stage Changes**), inspect **Staged Changes**, enter `lab: narrow the mock HTTPS sample source`, and select **Commit**.
-3. Select **...** → **Push**; use **Publish Branch** only if this branch was not yet published to your private copy.
-4. Refresh your own GitHub **Code** page, select `lab/tests-docs`, and inspect the newest commit and corrected sample.
-5. Open **Actions** → **Lab checks** → that newest-commit run → **Test learner module** → the learner-check command log.
-6. Read the actual phase records or first diagnostic; the missing generated API may still prevent full CI success until Step 3.
-7. Refresh the Exercise **body** after **AgentAlvine** finishes. Do not upload a harness log, evidence JSON, run ID, or manually edited checkbox.
+Inspect **Actions → Lab checks → newest commit → Test learner module**. AgentAlvine checks the exact narrow source and no `TODO` or `0.0.0.0/0`; final CI reruns every lane. Missing generated docs may still fail until Step 3. Do not submit logs or manual checkboxes.
 
 ![GitHub reference showing the workflow sidebar](../docs/images/github-workflow-sidebar.webp)
-*REFERENCE — GitHub publisher screenshot, CC BY 4.0. **CodeQL** is its example selection; choose **Lab checks** in your copy; [attribution](../docs/images/NOTICE.md).*
+*REFERENCE — GitHub, CC BY 4.0; choose **Lab checks**, not its example **CodeQL**. [Attribution](../docs/images/NOTICE.md).*
 
-### Expected result and what AgentAlvine checks
+No Azure login, backend/state access or real plan/apply. Detector success is not live security proof.
 
-- This step's file gate checks `source_address_prefix = "10.42.1.0/24"` and absence of `TODO` or `0.0.0.0/0` in the pushed sample.
-- The final learner job separately runs the actual root, child, two-case sample fixture, genuine seed harness, and documentation freshness check.
-- A claimed detector success is not a gate input; real CI reruns the detector rather than trusting uploaded evidence.
-
-### Troubleshooting
-
-| Symptom | Specific recovery |
-| --- | --- |
-| Only one boundary detects the defect | Stop and preserve the real diagnostic; ask the instructor, without editing either guard or the harness. |
-| Seed run has zero cases or unrelated errors | Treat it as failed verification; check the pinned toolchain and exact native filter behavior. |
-| Corrected sample still rejects ingress | Reopen the sample with **Ctrl+P** and check the source-address field and baseline input name; retain other fields and **Ctrl+S**. |
-| Fixture did not execute two runs | Check the complete quoted argument and native slash variant; an exit code alone is insufficient. |
-
-**Next action:** open [Step 3: generate the canonical module API](activity-03.md) without changing the Terraform interface.
+**Next:** [Step 3 — canonical documentation](activity-03.md).
 <!-- FULL-WS-LESSON:END -->
 
 ## Recorded simulation outcome

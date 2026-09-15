@@ -4,7 +4,21 @@
 
 [Full first-time setup](00-start-here.md) · [Enter your Azure values and sign in](azure-setup.md) · [Original simulation summary and verification limits](simulation.md) · [Repository landing page](../README.md)
 
-This review contains all four complete lessons from [.github/agentalvine/course.json](../.github/agentalvine/course.json), including setup, commands, expected results, recovery, and attributed reference images. Only relative Markdown links outside code fences are rebased in the copied lessons; the Markdown snippets intended for learner documents retain their original links. The recorded statuses belong to the **2026-09-08 private participant simulations**, not to a reader or the public template.
+All four lessons mirror the Exercise text; only relative Markdown links **outside code fences** are rebased. Snippets keep links for their destination files. No earlier lab is required.
+
+## Test-to-docs sequence
+
+```mermaid
+flowchart LR
+	Tests[Add learner tests] --> Detect[Detect temporary defect]
+	Detect --> Fix[Restore temp guards and narrow sample]
+	Fix --> Docs[Generate twice and check]
+	Docs --> CI[Read real GitHub code checks]
+```
+
+Plain text: add tests → harness detects and restores its temporary defect → narrow the actual sample → generate docs twice and check freshness → inspect real code checks. **Never seed-mutate source validators.**
+
+Use Node **24.16.0**, Terraform **1.16.1**, AzureRM **5.4.0**, terraform-docs **0.24.0**.
 
 | Activity | Full lesson | Cycle A | Cycle B |
 | --- | --- | --- | --- |
@@ -13,32 +27,22 @@ This review contains all four complete lessons from [.github/agentalvine/course.
 | 03 | [Generate the actual module interface](activity-03.md) | Recorded verified | Recorded verified |
 | 04 | [Explain consumption and pass learner CI](activity-04.md) | Recorded verified | Recorded verified |
 
-Both **Revision 4** original cycles reached **4/4 offline completion**, including the documentation gate. Whole-lab suite counts are not per-activity tests, and an older documentation issue must not be presented as an unresolved A/B blocker.
+These **2026-09-08 Revision 4 private simulations** each recorded **4/4 offline completion**, including docs. An older generator issue is not an unresolved A/B blocker. Whole-lab counts are not per-activity or unique totals inflated by fixture/seed repeats.
 
-## The Exercise issue is the learner guide
+## Use your own Exercise
 
-1. **Copy once:** create your own private numbered laboratory copy using the [repository landing page](../README.md), then clone and open that copy using the [full setup](00-start-here.md).
-2. **Open one Exercise issue:** after copying, use **your copy's README Exercise link**, not the public source link below. Its current **issue body** contains the task, files, acceptance criteria, progress, and next action. It is a learner guide, not a bug ticket or evidence submission.
-3. **Do the actual task:** edit or generate the named file → save → review the diff → stage → commit → push. Perform a real PR/review/merge or other GitHub activity only where a lesson actually requires it; Lab 04 has no additional PR or human approval gate.
-4. **Let credential-free checks observe the work:** the full learner check covers the root, included child, actual sample fixture, isolated seed detector, and canonical docs without Azure credentials, OIDC, or state access.
-5. **Return to the SAME ISSUE BODY:** AgentAlvine updates that body automatically, then presents the next task. **AgentAlvine is implemented with GitHub Actions**; the Actions tab is for run diagnostics, not a replacement for the Exercise issue.
+1. Copy once from the [landing page](../README.md), clone/open it and use **your copy's Exercise link**, not the source Preview.
+2. On `lab/tests-docs`, **Save → stage → commit → push → refresh the SAME Exercise**. [Git help](../docs/git-workflow.md) explains each action.
+3. Inspect **Actions → Lab checks → newest commit → Test learner module**. AgentAlvine updates the same issue body from real work; no manual checkboxes, evidence PR or human approval gate.
 
-Manual checkboxes, comments claiming success, and screenshots do not award progress. GitHub issue progression never authorizes Azure. The [workshop catalogue](https://github.com/alvinea28/ws2-workshop-catalogue) is a navigation repository and has **no course Exercise issue**.
+The full checker covers root, child, actual fixture, isolated detector and canonical docs without Azure credentials/OIDC/state. The additional [repository security hands-on guide](security-hands-on.md) is copied in full with rebased links: licensed GitHub protection and a scan-only Terraform finding/fix. It is outside these four gates and the original 33-step grader; no new integration evidence or screenshot-based credit is claimed. Neither code checks nor issue progress authorize cloud deployment.
 
 ## Public source preview — read only, not your learner issue
 
-[Open the live source Exercise #1 instructor Preview](https://github.com/alvinea28/ws2-terraform-tests-docs-laboratory-04/issues/1).
-
-The **2026-09-14 read-only GitHub observation** confirmed a successful source Preview run and an explicitly **read-only instructor Preview at step 0, with 0/4 participant progress**. This is not either private Cycle A/B issue, not a completed simulation, and not your own learner issue. After copying, use the Exercise link maintained in **your copy's README**.
+[Source Exercise #1](https://github.com/alvinea28/ws2-terraform-tests-docs-laboratory-04/issues/1) was observed on **2026-09-14** as a read-only instructor Preview, step 0 (**0/4**). It is neither private Cycle A/B nor your learner issue.
 
 ![Actual public Exercise preview for Laboratory 04 — new 2026-09-14 capture, not a completed simulation](images/exercise-preview.png)
 
-*Captured on 2026-09-14 from the actual public GitHub Exercise #1: read-only instructor Preview, step 0 (0/4). [images/provenance.json](images/provenance.json) records the PNG SHA-256 and exact capture timestamp. This current source Preview is not a September 8 participant screenshot or either private 4/4 outcome.*
+*Actual 2026-09-14 source Preview capture, not a September 8 participant screenshot. [Provenance](images/provenance.json) records its timestamp and SHA-256; no new capture is claimed.*
 
-See the separate [fresh local verification results](simulation.md#fresh-2026-09-14-verified-results) for command-output evidence, not participant progress.
-
-## If your private copy's Exercise is missing
-
-First refresh your copy's README and **Issues**, then inspect **Actions → AgentAlvine** and follow [missing-Exercise recovery](../docs/troubleshooting.md#agentalvine-or-the-exercise-is-missing). A busy queue can take longer than the initial wait.
-
-**Recovery only:** in the actual private learner copy, choose **Actions → AgentAlvine → Run workflow → Check progress**, selecting that copy's **actual default branch** (normally `dev`). This is not the normal progression protocol. **Do not choose Preview in a learner copy.** Do not create a fake Exercise, widen workflow/token permissions, disable protections, or dispatch a delivery workflow. Ask the instructor about a blocked policy rather than bypassing it.
+[2026-09-14 local verification](simulation.md#fresh-2026-09-14-verified-results) is separate from participant progress. If the Exercise is missing, refresh README/Issues, inspect **Actions → AgentAlvine** and follow [recovery](../docs/troubleshooting.md#agentalvine-or-the-exercise-is-missing). Never choose Preview in a learner copy or bypass repository policy.

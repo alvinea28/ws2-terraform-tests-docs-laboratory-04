@@ -6,7 +6,7 @@
     {
       "id": "README.md",
       "kind": "guide",
-      "summary": "Numbered laboratory content and guarded automatic validation."
+      "summary": "Concise independent test/documentation entry preserves canonical generation and separates repository-security hands-on from original grading."
     },
     {
       "id": ".github/agentalvine/course.json",
@@ -16,7 +16,7 @@
     {
       "id": ".github/agentalvine/auto-guide.cjs",
       "kind": "module",
-      "summary": "Numbered laboratory content and guarded automatic validation."
+      "summary": "Trusted AgentAlvine runtime changes only PR feedback to match reviewed mode while retaining existing gate evaluation and live boundaries."
     },
     {
       "id": ".github/agentalvine/auto-guide.test.cjs",
@@ -51,12 +51,12 @@
     {
       "id": "docs/start-here.md",
       "kind": "guide",
-      "summary": "Standalone illustrated first-time-user guidance or image provenance."
+      "summary": "Concise independent install/account/copy/clone/open guidance retains explained commands, references, expected results and recovery."
     },
     {
       "id": "docs/git-workflow.md",
       "kind": "guide",
-      "summary": "Standalone illustrated first-time-user guidance or image provenance."
+      "summary": "Concise branch and PR guidance distinguishes policy-permitted educational self-merge in 01/05 from protected live independent approval."
     },
     {
       "id": "docs/copilot-guide.md",
@@ -91,7 +91,7 @@
     {
       "id": "full-ws-content/README.md",
       "kind": "guide",
-      "summary": "Full workshop review index distinguishes the live learner Exercise from the read-only source Preview."
+      "summary": "Concise review index preserves original A/B outcomes and links security hands-on separately from canonical documentation and test grading."
     },
     {
       "id": "full-ws-content/00-start-here.md",
@@ -145,7 +145,49 @@
       "id": "docs/daily work report/2026-09-15.md",
       "kind": "report",
       "date": "2026-09-15",
-      "summary": "Attendee-owned Azure setup and recorded checks preserve existing test and documentation gates while keeping instruction stubs separate from workshop completion."
+      "summary": "Same-day setup history plus concise security follow-up records 35 Node passes and verified exact-generation/rejection reruns without claiming tests run by reporting; commit-bound publication tracked separately."
+    },
+    {
+      "id": "docs/glossary.md",
+      "kind": "guide",
+      "date": "2026-09-15",
+      "summary": "Concise terminology separates provider contracts, negative tests, documentation freshness and live security findings."
+    },
+    {
+      "id": ".github/steps/01.md",
+      "kind": "guide",
+      "date": "2026-09-15",
+      "summary": "Concise test lesson retains positive assertions and explicit intended-rejection cases."
+    },
+    {
+      "id": ".github/steps/02.md",
+      "kind": "guide",
+      "date": "2026-09-15",
+      "summary": "Concise detector lesson requires isolated seeded errors and a sample rule rather than treating all failures as success."
+    },
+    {
+      "id": ".github/steps/03.md",
+      "kind": "guide",
+      "date": "2026-09-15",
+      "summary": "Concise documentation lesson retains the exact canonical generator and freshness/rejection requirements."
+    },
+    {
+      "id": ".github/steps/04.md",
+      "kind": "guide",
+      "date": "2026-09-15",
+      "summary": "Concise consumer-documentation lesson finishes with the original full learner checker."
+    },
+    {
+      "id": "docs/security-hands-on.md",
+      "kind": "guide",
+      "date": "2026-09-15",
+      "summary": "Repository-security guide distinguishes dependency review, supported-language CodeQL, HCL scanning and secret protection with entitlement and fix/rescan limits."
+    },
+    {
+      "id": "full-ws-content/security-hands-on.md",
+      "kind": "guide",
+      "date": "2026-09-15",
+      "summary": "Full security hands-on mirror preserves safe examples and does not equate configuration checks with actual findings ingestion."
     }
   ],
   "edges": [
@@ -256,6 +298,81 @@
       "to": "docs/daily work report/2026-09-15.md",
       "rel": "maintenance-report",
       "date": "2026-09-15"
+    },
+    {
+      "from": "docs/start-here.md",
+      "to": "docs/glossary.md",
+      "rel": "terminology"
+    },
+    {
+      "from": ".github/agentalvine/course.json",
+      "to": ".github/steps/01.md",
+      "rel": "lesson"
+    },
+    {
+      "from": ".github/agentalvine/course.json",
+      "to": ".github/steps/02.md",
+      "rel": "lesson"
+    },
+    {
+      "from": ".github/agentalvine/course.json",
+      "to": ".github/steps/03.md",
+      "rel": "lesson"
+    },
+    {
+      "from": ".github/agentalvine/course.json",
+      "to": ".github/steps/04.md",
+      "rel": "lesson"
+    },
+    {
+      "from": "full-ws-content/activity-01.md",
+      "to": ".github/steps/01.md",
+      "rel": "mirrors"
+    },
+    {
+      "from": "full-ws-content/activity-02.md",
+      "to": ".github/steps/02.md",
+      "rel": "mirrors"
+    },
+    {
+      "from": "full-ws-content/activity-03.md",
+      "to": ".github/steps/03.md",
+      "rel": "mirrors"
+    },
+    {
+      "from": "full-ws-content/activity-04.md",
+      "to": ".github/steps/04.md",
+      "rel": "mirrors"
+    },
+    {
+      "from": ".github/steps/03.md",
+      "to": "scripts/generate-docs.mjs",
+      "rel": "documents-command"
+    },
+    {
+      "from": "README.md",
+      "to": "docs/security-hands-on.md",
+      "rel": "companion-guide"
+    },
+    {
+      "from": "full-ws-content/README.md",
+      "to": "full-ws-content/security-hands-on.md",
+      "rel": "companion-guide"
+    },
+    {
+      "from": "full-ws-content/security-hands-on.md",
+      "to": "docs/security-hands-on.md",
+      "rel": "mirrors"
+    },
+    {
+      "from": "docs/daily work report/2026-09-15.md",
+      "to": "docs/security-hands-on.md",
+      "rel": "records-companion-scope"
+    },
+    {
+      "from": "docs/daily work report/2026-09-15.md",
+      "to": "scripts/generate-docs.mjs",
+      "rel": "records-verification-scope"
     }
   ],
   "hotspots": [
