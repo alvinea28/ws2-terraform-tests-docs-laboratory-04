@@ -8,6 +8,9 @@
 
 ## Start here
 
+**Windows x64:** [prepare all tools and VS Code extensions in one go](https://github.com/alvinea28/ws2-workshop-catalogue/blob/dev/docs/windows-setup.md#2-paste-this-one-command)
+before cloning. Run once for all eight labs; after READY/restart, skip manual installs below.
+
 1. **Install/sign in:** [install the tools](docs/toolchain.md); restart VS Code. GitHub **Sign up** → verify email, or sign in to your personal account. Accept any assigned organization invitation.
 2. **Copy once:** **COPY EXERCISE** below or **Use this template → Create a new repository**. Keep **Private** and the `-laboratory-04` suffix. Already copied? Reuse it.
 3. **Clone/open:** copy **your copy's Code → HTTPS URL**. VS Code **Ctrl+Shift+P** (macOS **Cmd+Shift+P**) → **Git: Clone**, paste, choose destination, **Open**. Trust only the clone; Explorer must show it, not its parent.
